@@ -20,7 +20,6 @@
 
 <script>
 import { Chart } from "highcharts-vue"
-import webCrimeData from "@/data/webCrimeData.json"
 
 export default {
     mounted() {

@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
-import Vue from 'vue';
+// import Vue from 'vue';
 import HighchartsVue from 'highcharts-vue';
 // import axios from 'axios'
 // import VueAxios from 'vue-axios'
