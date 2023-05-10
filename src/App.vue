@@ -1,14 +1,14 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
 export default {
   created() {
-  window.addEventListener("beforeunload", () => {
-    localStorage.setItem("store",JSON.stringify(this.$store.state))
-  })
-  localStorage.getItem("store") && this.$store.replaceState(Object.assign(this.$store.state,JSON.parse(localStorage.getItem("store"))));
+    window.addEventListener("beforeunload", () => {
+      localStorage.setItem("store", JSON.stringify(this.$store.state))
+    })
+    localStorage.getItem("store") && this.$store.replaceState(Object.assign(this.$store.state, JSON.parse(localStorage.getItem("store"))));
   }
 }
 </script>
@@ -21,5 +21,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 </style>

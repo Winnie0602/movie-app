@@ -19,19 +19,6 @@ firebase.initializeApp(firebaseConfig)
 const projectFirestore = firebase.firestore()
 const firebaseAuth = firebase.default.auth()
 
-// firebase.default.auth()
-//   .createUserWithEmailAndPassword("1234@test.com", "123456")
-//   .then(result => {
-//     console.log(result)
-//   }).catch(function(error) {
-//     console.log(error.message)
-//   });
 
-// projectFirestore.collection("UserList").get().then((querySnapshot) => {
-//   querySnapshot.forEach((doc) => {
-//       // doc.data() is never undefined for query doc snapshots
-//       console.log(doc.data());
-//   });
-// });
 // export firestore
 export { projectFirestore, firebaseAuth }

@@ -1,54 +1,56 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-700" href="/mainPage/moviesBoard">Your Movie App｜ </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-                        <router-link class="nav-link text-white" to="/mainPage/moviesBoard">首頁</router-link>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <router-link class="nav-link text-white" to="/">現正熱映</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link text-white" to="/">即將上映</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link text-white" to="/"></router-link>
-                    </li> -->
-                </ul>
-                <div class="row align-items-center justify-content-center mx-3">
-                    <!-- <img class="col-auto" src="@/assets/userLogo.png" alt=""> -->
-                    <span class="col-auto material-symbols-outlined" style="color: white;">favorite</span>
-                    <span class="col-auto material-symbols-outlined" style="color: white;">account_circle</span>
-                    <!-- <a class="col-auto text-white text-decoration-none fs-5 text-bold">您好 : {{ account }}</a> -->
-                    <!-- <button class="col-auto btn btn-light mx-2" @click="logout">登出</button> -->
-                </div>
+            <span class="row mx-0">
+                <router-link :to="{ name: 'moviesBoard' }" class="col-auto mt-2 navbar-brand text-light">
+                    Movie APP
+                </router-link>
+            </span>
+
+            <div class="row align-items-center mx-1">
+                <a class="col-auto text-white text-decoration-none text-300 text-bold">{{ getGreeting() }}</a>
+                    <span @click="logout" data-bs-toggle="tooltip" data-bs-placement="bottom" title="logout" class="col-auto material-symbols-outlined"
+                        style="color: white; cursor: pointer;">logout
+                    </span>
+
+                <router-link :to="{ name: 'favoriteMovies' }" class="col-auto mt-2">
+                    <span class="material-symbols-outlined" style="color: white; cursor: pointer;">favorite</span>
+                </router-link>
             </div>
         </div>
     </nav>
 </template>
 
 <script>
-import store from '@/store'
+import moment from "moment";
+import swal from 'sweetalert';
 
 export default {
+    name: "NavBar",
+    components: {
+    },
     data() {
         return {
-            account: store.state.account
+            account: this.$store.state.account.substring(0, this.$store.state.account.indexOf("@"))
         }
     },
     mounted() {
     },
     methods: {
         logout() {
-            store.commit("setAccount", "")
-            store.commit("setAccountId", "")
-            this.$router.push("/")
+            this.$store.commit("setAccount", "")
+            swal("Log out successfully", "", "success")
+                .then(() => {
+                    this.$router.push({ name: "login" })
+                })
+            
+        },
+        getGreeting() {
+            let greeting = "";
+            moment().format("hA").includes("AM")
+                ? (greeting = "Good Morning")
+                : (greeting = "Good Evening")
+            return `${greeting}, ${this.account}`;
         }
     }
 
@@ -56,4 +58,7 @@ export default {
 </script>
 
 <style scoped>
+.material-symbols-outlined {
+    font-size: 28px;
+}
 </style>
